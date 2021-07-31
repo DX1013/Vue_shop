@@ -1,0 +1,17 @@
+<script>
+    // ----------------- 分配权限处理 ------------------
+    async showSetRightDialog(role) {
+        this.roleId = role.id
+        const {
+            data: res
+        } = await this.$http.get('rights/tree')
+        if (res.meta.status !== 200) {
+            return this.$message.error('获取权限信息失败!')
+        }
+        // console.log(res)
+        this.rightsList = res.data
+            // console.log(this.rightsList)
+        this.getLeafKeys(role, this.defKeys)
+        this.setRightDialogVisible = true
+    },
+</script>
